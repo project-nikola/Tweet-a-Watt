@@ -3,6 +3,8 @@ import serial, time, datetime, sys
 from xbee import xbee
 import twitter
 import sensorhistory
+import atexit
+import glob
 
 # use App Engine? or log file? comment out next line if appengine
 LOGFILENAME = "powerdatalog.csv"   # where we will store our flatfile data
@@ -20,7 +22,7 @@ if GRAPHIT:
     from pylab import *
 
 
-SERIALPORT = "COM4"    # the com/serial port the XBee is connected to
+SERIALPORT = glob.glob('/dev/tty.usbserial*')[0]
 BAUDRATE = 9600      # the baud rate we talk to the xbee
 CURRENTSENSE = 4       # which XBee ADC has current draw data
 VOLTSENSE = 0          # which XBee ADC has mains voltage data
@@ -53,7 +55,7 @@ def TwitterIt(u, p, message):
 
 # open up the FTDI serial port to get data transmitted to xbee
 ser = serial.Serial(SERIALPORT, BAUDRATE)
-ser.open()
+atexit.register(ser.close)
 
 # open our datalogging file
 logfile = None
