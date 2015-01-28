@@ -32,7 +32,9 @@ vrefcalibration = [492,  # Calibration for sensor #0
                    489,  # Calibration for sensor #2
                    492,  # Calibration for sensor #3
                    501,  # Calibration for sensor #4
-                   493]  # etc... approx ((2.4v * (10Ko/14.7Ko)) / 3
+                   493,
+                   492,
+                   486]  # etc... approx ((2.4v * (10Ko/14.7Ko)) / 3
 CURRENTNORM = 15.5  # conversion to amperes from ADC
 NUMWATTDATASAMPLES = 1800 # how many samples to watch in the plot window, 1 hr @ 2s samples
 
