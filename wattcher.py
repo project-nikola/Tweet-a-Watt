@@ -1,10 +1,13 @@
 #!/usr/bin/env python
-import serial, time, datetime, sys
-from xbee import xbee
-import twitter
-import sensorhistory
 import atexit
+import datetime
 import glob
+import sensorhistory
+import serial
+import sys
+import time
+import twitter
+from xbee import xbee
 
 # use App Engine? or log file? comment out next line if appengine
 LOGFILENAME = "powerdatalog.csv"   # where we will store our flatfile data
