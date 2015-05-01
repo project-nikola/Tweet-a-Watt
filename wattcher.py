@@ -25,7 +25,29 @@ if GRAPHIT:
     from pylab import *
 
 
-SERIALPORT = glob.glob('/dev/tty.usbserial*')[0]
+def open_serial_port(win_port="COM10", baud_rate=9600):
+    """Return an opened serial port for Mac, Windows, and Linux."""
+    if sys.platform == 'win32':
+        port = win_port
+    else:
+        if sys.platform == 'darwin':  # Mac OSX
+            port_list = glob.glob("/dev/tty.usbserial*")
+        else:  # Raspberry Pi
+            port_list = glob.glob("/dev/ttyUSB*")
+
+        if len(port_list) < 1:
+            raise EnvironmentError("No available serial ports found.")
+        port = port_list[0]
+
+    try:
+        serial_port = serial.Serial(port, baud_rate)
+    except serial.SerialException:
+        raise EnvironmentError("Unable to open port {}".format(port))
+
+    atexit.register(serial_port.close())
+    return serial_port
+
+
 BAUDRATE = 9600      # the baud rate we talk to the xbee
 CURRENTSENSE = 4       # which XBee ADC has current draw data
 VOLTSENSE = 0          # which XBee ADC has mains voltage data
@@ -59,8 +81,7 @@ def TwitterIt(u, p, message):
 
 
 # open up the FTDI serial port to get data transmitted to xbee
-ser = serial.Serial(SERIALPORT, BAUDRATE)
-atexit.register(ser.close)
+ser = open_serial_port(BAUDRATE)
 
 # open our datalogging file
 logfile = None
