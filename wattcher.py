@@ -44,7 +44,7 @@ def open_serial_port(win_port="COM10", baud_rate=9600):
     except serial.SerialException:
         raise EnvironmentError("Unable to open port {}".format(port))
 
-    atexit.register(serial_port.close())
+    atexit.register(serial_port.close)
     return serial_port
 
 
