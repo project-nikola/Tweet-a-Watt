@@ -49,8 +49,8 @@ def open_serial_port(win_port="COM10", baud_rate=9600):
 
 
 BAUDRATE = 9600      # the baud rate we talk to the xbee
-CURRENTSENSE = 4       # which XBee ADC has current draw data
-VOLTSENSE = 0          # which XBee ADC has mains voltage data
+CURRENTSENSE = 0       # which XBee ADC has current draw data
+VOLTSENSE = 4          # which XBee ADC has mains voltage data
 MAINSVPP = 170 * 2     # +-170V is what 120Vrms ends up being (= 120*2sqrt(2))
 vrefcalibration = [492,  # Calibration for sensor #0
                    498,  # Calibration for sensor #1
