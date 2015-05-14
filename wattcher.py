@@ -81,7 +81,7 @@ def TwitterIt(u, p, message):
 
 
 # open up the FTDI serial port to get data transmitted to xbee
-ser = open_serial_port(BAUDRATE)
+ser = open_serial_port(baud_rate=BAUDRATE)
 
 # open our datalogging file
 logfile = None
